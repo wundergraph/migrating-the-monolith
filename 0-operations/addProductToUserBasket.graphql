@@ -1,0 +1,8 @@
+mutation {
+  addProductToUserBasket(input: { product: { sku: "tea", upc: 4 }, userId: 3 }) {
+    basket {
+      name
+    }
+    username
+  }
+}

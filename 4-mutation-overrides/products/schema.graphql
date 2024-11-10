@@ -1,0 +1,36 @@
+extend schema
+@link(url: "https://specs.apollo.dev/federation/v2.5", import: ["@key", "@override"])
+
+"""
+Add the BasketInput input
+"""
+input BasketInput {
+  product: ProductInput!
+  userId: Int!
+}
+
+"""
+Add the Mutation type and override the field to add to a User's basket
+"""
+type Mutation {
+  addProductToUserBasket(input: BasketInput!): User @override(from: "monolith")
+}
+
+type Product @key(fields: "sku upc") {
+  sku: ID!
+  upc: Int!
+  name: String! @override(from: "monolith")
+}
+
+input ProductInput {
+  sku: ID!
+  upc: Int!
+}
+
+"""
+Add the User type and override the basket field
+"""
+type User @key(fields: "id") {
+  id: Int!
+  basket: [Product!]! @override(from: "monolith")
+}

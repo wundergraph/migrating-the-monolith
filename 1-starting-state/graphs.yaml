@@ -1,0 +1,6 @@
+version: 1
+subgraphs:
+  - name: monolith
+    routing_url: http://localhost:4111/graphql
+    schema:
+      file: ./monolith/schema.graphql

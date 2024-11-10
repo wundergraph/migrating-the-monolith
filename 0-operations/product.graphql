@@ -1,0 +1,18 @@
+{
+  product(input: { sku: "spices", upc: 3 }) {
+    sku
+    upc
+    name
+    reviews {
+      author {
+        id
+        username
+        basket {
+          name
+        }
+      }
+      content
+      rating
+    }
+  }
+}

@@ -1,0 +1,45 @@
+extend schema
+@link(url: "https://specs.apollo.dev/federation/v2.5", import: ["@key", "@override"])
+
+input BasketInput {
+  product: ProductInput!
+  userId: Int!
+}
+
+type Mutation {
+  addProductToUserBasket(input: BasketInput!): User @override(from: "monolith")
+}
+
+type Product @key(fields: "sku upc") {
+  sku: ID!
+  upc: Int!
+  name: String! @override(from: "monolith")
+}
+
+input ProductInput {
+  sku: ID!
+  upc: Int!
+}
+
+"""
+Add the Query type and override the product, products, and ratings fields
+"""
+type Query {
+  product(input: ProductInput!): Product @override(from: "monolith")
+  products: [Product!]! @override(from: "monolith")
+  ratings: [Rating!]! @override(from: "monolith")
+}
+
+"""
+Add the Rating enum
+"""
+enum Rating {
+  NEGATIVE
+  NEUTRAL
+  POSITIVE
+}
+
+type User @key(fields: "id") {
+  id: Int!
+  basket: [Product!]! @override(from: "monolith")
+}

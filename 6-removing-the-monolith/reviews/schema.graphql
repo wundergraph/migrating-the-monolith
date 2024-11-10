@@ -1,0 +1,47 @@
+extend schema
+@link(url: "https://specs.apollo.dev/federation/v2.5", import: ["@key", "@override"])
+
+"""
+Add the Mutation type and override the field to add a review to a Product
+"""
+type Mutation {
+  addProductReview(input: ProductReviewInput!): Review @override(from: "monolith")
+}
+
+type Product @key(fields: "sku upc") {
+  sku: ID!
+  upc: Int!
+  reviews: [Review!]! @override(from: "monolith")
+}
+
+input ProductInput {
+  sku: ID!
+  upc: Int!
+}
+
+input ProductReviewInput {
+  product: ProductInput!
+  review: ReviewInput!
+}
+
+enum Rating {
+  NEGATIVE
+  NEUTRAL
+  POSITIVE
+}
+
+type Review {
+  author: User! @override(from: "monolith")
+  content: String! @override(from: "monolith")
+  rating: Rating! @override(from: "monolith")
+}
+
+input ReviewInput {
+  authorId: Int!
+  content: String!
+  rating: Rating!
+}
+
+type User @key(fields: "id") {
+  id: Int!
+}

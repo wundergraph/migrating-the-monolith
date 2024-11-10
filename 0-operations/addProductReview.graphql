@@ -1,0 +1,30 @@
+mutation {
+  addProductReview(
+    input: {
+      product: {
+        sku: "spices",
+        upc: 3,
+      },
+      review: {
+        authorId: 1,
+        rating: POSITIVE,
+        content: "Delicious."
+      }
+    }) {
+    author {
+      username
+      basket {
+        sku
+        upc
+        reviews {
+          content
+          author {
+            username
+          }
+        }
+      }
+    }
+    content
+    rating
+  }
+}

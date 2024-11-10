@@ -1,0 +1,7 @@
+extend schema
+@link(url: "https://specs.apollo.dev/federation/v2.5", import: ["@key", "@override"])
+
+type User @key(fields: "id") {
+  id: Int!
+  username: String!@override(from: "monolith")
+}

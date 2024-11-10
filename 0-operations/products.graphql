@@ -1,0 +1,12 @@
+{
+  products {
+    sku
+    upc
+    name
+    reviews {
+      author {
+        id
+      }
+    }
+  }
+}

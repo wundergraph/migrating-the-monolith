@@ -1,0 +1,18 @@
+{
+  users {
+    id
+    username
+    basket {
+      upc
+      sku
+      name
+      reviews {
+        rating
+        author {
+          username
+        }
+        content
+      }
+    }
+  }
+}

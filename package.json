@@ -1,0 +1,46 @@
+{
+  "name": "migrating-the-monolith",
+  "version": "1.0.0",
+  "description": "A demonstration for how a monolith might be split into microservices.",
+  "scripts": {
+    "1-starting-state": "concurrently --kill-others-on-fail \"tsx ./1-starting-state/monolith/monolith.ts\" \"./router/router -override-env ./1-starting-state/.env\"",
+    "1-starting-state-test": "vitest run --dir ./1-starting-state",
+    "2-first-services-and-entities": "concurrently --kill-others-on-fail \"tsx ./1-starting-state/monolith/monolith.ts\" \"tsx ./2-first-services-and-entities/products/products.ts\" \"tsx ./2-first-services-and-entities/users/users.ts\" \"./router/router -override-env ./2-first-services-and-entities/.env\"",
+    "2-first-services-and-entities-test": "vitest run --dir ./2-first-services-and-entities",
+    "3-first-entity-overrides": "concurrently --kill-others-on-fail \"tsx ./1-starting-state/monolith/monolith.ts\" \"tsx ./3-first-entity-overrides/products/products.ts\" \"tsx ./3-first-entity-overrides/users/users.ts\" \"./router/router -override-env ./3-first-entity-overrides/.env\"",
+    "3-first-entity-overrides-test": "vitest run --dir ./3-first-entity-overrides",
+    "4-mutation-overrides": "concurrently --kill-others-on-fail \"tsx ./1-starting-state/monolith/monolith.ts\" \"tsx ./4-mutation-overrides/products/products.ts\" \"tsx ./4-mutation-overrides/reviews/reviews.ts\" \"tsx ./4-mutation-overrides/users/users.ts\" \"./router/router -override-env ./4-mutation-overrides/.env\"",
+    "4-mutation-overrides-test": "vitest run --dir ./4-mutation-overrides",
+    "5-query-overrides": "concurrently --kill-others-on-fail \"tsx ./1-starting-state/monolith/monolith.ts\" \"tsx ./5-query-overrides/products/products.ts\" \"tsx ./5-query-overrides/reviews/reviews.ts\" \"tsx ./5-query-overrides/users/users.ts\" \"./router/router -override-env ./5-query-overrides/.env\"",
+    "5-query-overrides-test": "vitest run --dir ./5-query-overrides",
+    "6-removing-the-monolith": "concurrently --kill-others-on-fail \"tsx ./6-removing-the-monolith/products/products.ts\" \"tsx ./6-removing-the-monolith/reviews/reviews.ts\" \"tsx ./6-removing-the-monolith/users/users.ts\" \"./router/router -override-env ./6-removing-the-monolith/.env\"",
+    "6-removing-the-monolith-test": "vitest run --dir ./6-removing-the-monolith",
+    "7-finished-state": "concurrently --kill-others-on-fail \"tsx ./7-finished-state/products/products.ts\" \"tsx ./7-finished-state/reviews/reviews.ts\" \"tsx ./7-finished-state/users/users.ts\" \"./router/router -override-env ./7-finished-state/.env\"",
+    "7-finished-state-test": "vitest run --dir ./7-finished-state",
+    "router": "./router/router"
+  },
+  "keywords": [],
+  "author": {
+    "name": "David Stutt",
+    "email": "david@wundergraph.com"
+  },
+  "license": "Apache-2.0",
+  "type": "module",
+  "main": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "files": [
+    "dist"
+  ],
+  "dependencies": {
+    "@apollo/server": "^4.11.2",
+    "@apollo/subgraph": "^2.9.3",
+    "concurrently": "^9.1.0",
+    "execa": "^9.5.1",
+    "graphql": "^16.9.0",
+    "tsx": "^4.19.2"
+  },
+  "devDependencies": {
+    "typescript": "^5.6.3",
+    "vitest": "^2.1.4"
+  }
+}

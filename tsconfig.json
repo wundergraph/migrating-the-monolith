@@ -1,0 +1,21 @@
+{
+  "compilerOptions": {
+    "declaration": true,
+    "allowJs": true,
+    "strict": true,
+    "moduleResolution": "node",
+    "module": "ESNext",
+    "outDir": "./dist/js",
+    "esModuleInterop": true,
+    "sourceMap": true,
+    "skipLibCheck": true,
+    "isolatedModules": true,
+    "resolveJsonModule": true,
+    "incremental": true,
+    "allowSyntheticDefaultImports": true,
+    "forceConsistentCasingInFileNames": true,
+    "noFallthroughCasesInSwitch": true,
+    "target": "ESNext"
+  },
+  "exclude": ["node_modules"]
+}

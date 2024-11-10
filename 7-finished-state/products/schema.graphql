@@ -1,0 +1,40 @@
+extend schema
+@link(url: "https://specs.apollo.dev/federation/v2.5", import: ["@key"])
+
+input BasketInput {
+  product: ProductInput!
+  userId: Int!
+}
+
+type Mutation {
+  addProductToUserBasket(input: BasketInput!): User
+}
+
+type Product @key(fields: "sku upc") {
+  sku: ID!
+  upc: Int!
+  name: String!
+}
+
+input ProductInput {
+  sku: ID!
+  upc: Int!
+}
+
+type Query {
+  product(input: ProductInput!): Product
+  products: [Product!]!
+  ratings: [Rating!]!
+}
+
+enum Rating {
+  NEGATIVE
+  NEUTRAL
+  PENDING
+  POSITIVE
+}
+
+type User @key(fields: "id") {
+  id: Int!
+  basket: [Product!]!
+}

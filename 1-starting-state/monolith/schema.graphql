@@ -1,0 +1,58 @@
+input BasketInput {
+  product: ProductInput!
+  userId: Int!
+}
+
+type Query {
+  product(input: ProductInput!): Product
+  products: [Product!]!
+  ratings: [Rating!]!
+  user(id: Int!): User
+  users: [User!]!
+}
+
+type Mutation {
+  addProductReview(input: ProductReviewInput): Review
+  addProductToUserBasket(input: BasketInput): User
+}
+
+type Product {
+  sku: ID!
+  upc: Int!
+  name: String!
+  reviews: [Review!]!
+}
+
+input ProductInput {
+  sku: ID!
+  upc: Int!
+}
+
+input ProductReviewInput {
+  product: ProductInput!
+  review: ReviewInput!
+}
+
+type User {
+  basket: [Product!]!
+  id: Int!
+  username: String!
+}
+
+enum Rating {
+  POSITIVE
+  NEUTRAL
+  NEGATIVE
+}
+
+input ReviewInput {
+  authorId: Int!
+  content: String!
+  rating: Rating!
+}
+
+type Review {
+  author: User!
+  content: String!
+  rating: Rating!
+}

@@ -1,0 +1,8 @@
+extend schema
+@link(url: "https://specs.apollo.dev/federation/v2.5", import: ["@key", "@override"])
+
+type Product @key(fields: "sku upc") {
+  sku: ID!
+  upc: Int!
+  name: String! @override(from: "monolith")
+}
