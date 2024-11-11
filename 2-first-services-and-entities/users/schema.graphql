@@ -1,6 +1,13 @@
+# Add the @link directive and import the "@key" directive
 extend schema
 @link(url: "https://specs.apollo.dev/federation/v2.5", import: ["@key"])
 
+"""
+Add the User type as an entity.
+The id field is necessary to uniquely identify a User.
+Note that the resolvable argument is set to false.
+This means no entity resolver is defined for User in this subgraph (yet).
+"""
 type User @key(fields: "id", resolvable: false) {
   id: Int!
 }

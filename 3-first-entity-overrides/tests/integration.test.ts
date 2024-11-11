@@ -22,7 +22,9 @@ import {
 import { newMonolithServer, newServer } from '../../test-utils/test-utils';
 import { resolvers as productsResolvers, typeDefs as productsTypeDefs } from '../products/products';
 import { resolvers as usersResolvers, typeDefs as usersTypeDefs } from '../users/users';
+import fetchBuilder from 'fetch-retry';
 
+const fetch = fetchBuilder(global.fetch);
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 const monolithPort = 4111;
@@ -40,7 +42,18 @@ describe('3-first-entity-overrides integration tests', () => {
       cancelSignal: controller.signal,
       gracefulCancel: true,
     })`pnpm run router --override-env ${__dirname}/../.env`;
-    await new Promise(delay => setTimeout(delay, 1000));
+    await fetch(`http://localhost:3002/health`, {
+      retryOn: function(attempt, error, response) {
+        if (error || (response && response.status !== 200)) {
+          console.log(`Waiting for router. Retry: ${attempt + 1}`);
+          return true;
+        }
+        return false;
+      },
+      method: 'GET',
+      retries: 10,
+      retryDelay: 100,
+    });
   });
 
   beforeEach(async () => {

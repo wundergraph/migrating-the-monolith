@@ -1,6 +1,13 @@
+# Add the @link directive and import the "@key" directive
 extend schema
 @link(url: "https://specs.apollo.dev/federation/v2.5", import: ["@key"])
 
+"""
+Add the Product type as an entity.
+The sku AND upc fields are necessary to uniquely identify a Product (compound key).
+Note that the resolvable argument is set to false.
+This means no entity resolver is defined for Product in this subgraph (yet).
+"""
 type Product @key(fields: "sku upc", resolvable: false) {
   sku: ID!
   upc: Int!

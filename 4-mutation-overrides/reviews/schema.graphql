@@ -1,3 +1,4 @@
+# Add the @link directive and import the "@key" and "@override" directives
 extend schema
 @link(url: "https://specs.apollo.dev/federation/v2.5", import: ["@key", "@override"])
 

@@ -1,8 +1,18 @@
+# Import the "@override" directive
 extend schema
 @link(url: "https://specs.apollo.dev/federation/v2.5", import: ["@key", "@override"])
 
+"""
+The entity resolver has now been implemented for Product in this subgraph.
+Consequently, the "resolvable" argument has been removed (the default value is true).
+"""
 type Product @key(fields: "sku upc") {
   sku: ID!
   upc: Int!
+  """
+  The responsibility for the name field is transferred to this subgraph from the monolith.
+  This is done using the "@override" directive.
+  The "from" argument takes the exact name of the target subgraph.
+  """
   name: String! @override(from: "monolith")
 }

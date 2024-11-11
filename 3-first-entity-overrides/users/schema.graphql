@@ -1,7 +1,17 @@
+# Import the "@override" directive
 extend schema
 @link(url: "https://specs.apollo.dev/federation/v2.5", import: ["@key", "@override"])
 
+"""
+The entity resolver has now been implemented for User in this subgraph.
+Consequently, the "resolvable" argument has been removed (the default value is true).
+"""
 type User @key(fields: "id") {
   id: Int!
+  """
+  The responsibility for the username field is transferred to this subgraph from the monolith.
+  This is done using the "@override" directive.
+  The "from" argument takes the exact name of the target subgraph.
+  """
   username: String!@override(from: "monolith")
 }
