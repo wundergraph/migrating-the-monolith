@@ -43,6 +43,6 @@ input ReviewInput {
   rating: Rating!
 }
 
-type User @key(fields: "id") {
+type User @key(fields: "id", resolvable: false) {
   id: Int!
 }

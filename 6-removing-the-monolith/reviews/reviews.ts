@@ -30,11 +30,6 @@ export const resolvers = {
       return newReview;
     }
   },
-  User: {
-    __resolveReference({ id, }: { id: number }) {
-      return users.get(id);
-    },
-  },
   Product: {
     __resolveReference({ sku, upc, }: { sku: string, upc: number, }) {
       return products.get(`${sku}${upc}`);
