@@ -1,4 +1,4 @@
-{
+query Products {
   products {
     sku
     upc

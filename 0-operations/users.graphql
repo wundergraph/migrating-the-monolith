@@ -1,4 +1,4 @@
-{
+query Users {
   users {
     id
     username

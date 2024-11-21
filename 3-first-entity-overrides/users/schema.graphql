@@ -13,5 +13,5 @@ type User @key(fields: "id") {
   This is done using the "@override" directive.
   The "from" argument takes the exact name of the target subgraph.
   """
-  username: String!@override(from: "monolith")
+  username: String! @override(from: "monolith")
 }

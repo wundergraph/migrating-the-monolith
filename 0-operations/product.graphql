@@ -1,4 +1,4 @@
-{
+query Product {
   product(input: { sku: "spices", upc: 3 }) {
     sku
     upc

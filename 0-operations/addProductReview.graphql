@@ -1,4 +1,4 @@
-mutation {
+mutation AddProductReview {
   addProductReview(
     input: {
       product: {

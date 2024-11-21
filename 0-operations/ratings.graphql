@@ -1,0 +1,3 @@
+query Ratings {
+  ratings
+}
